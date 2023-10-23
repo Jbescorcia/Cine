@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2023 at 01:55 AM
+-- Generation Time: Oct 23, 2023 at 09:17 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -59,7 +59,7 @@ CREATE TABLE `funcion` (
 --
 
 INSERT INTO `funcion` (`codigo`, `fecha`, `codigoPelicula`, `codigoSala`) VALUES
-('TARDE', '2023-10-22 17:22:00', '78YT', 'WQ234');
+('qdadd', '2023-10-23 14:15:00', 'qweqe', 'BNM12');
 
 -- --------------------------------------------------------
 
@@ -78,7 +78,7 @@ CREATE TABLE `pelicula` (
 --
 
 INSERT INTO `pelicula` (`nombre`, `codigo`, `clasificacion`) VALUES
-('TITANIC', '78YT', 'tp');
+('qweqwe', 'qweqe', 'tp');
 
 -- --------------------------------------------------------
 
@@ -97,7 +97,7 @@ CREATE TABLE `sala` (
 --
 
 INSERT INTO `sala` (`nombre`, `codigo`, `capacidad`) VALUES
-('SALA 4', 'WQ234', 24);
+('SALA 8', 'BNM12', 24);
 
 --
 -- Indexes for dumped tables
@@ -113,20 +113,22 @@ ALTER TABLE `administrador`
 -- Indexes for table `funcion`
 --
 ALTER TABLE `funcion`
-  ADD UNIQUE KEY `codigoSala` (`codigoSala`),
-  ADD UNIQUE KEY `codigoPelicula` (`codigoPelicula`);
+  ADD KEY `codigoPelicula` (`codigoPelicula`),
+  ADD KEY `codigoSala` (`codigoSala`);
 
 --
 -- Indexes for table `pelicula`
 --
 ALTER TABLE `pelicula`
-  ADD PRIMARY KEY (`codigo`) USING BTREE;
+  ADD PRIMARY KEY (`codigo`),
+  ADD UNIQUE KEY `codigo` (`codigo`);
 
 --
 -- Indexes for table `sala`
 --
 ALTER TABLE `sala`
-  ADD PRIMARY KEY (`codigo`) USING BTREE;
+  ADD PRIMARY KEY (`codigo`),
+  ADD UNIQUE KEY `codigo` (`codigo`);
 
 --
 -- Constraints for dumped tables
@@ -136,8 +138,8 @@ ALTER TABLE `sala`
 -- Constraints for table `funcion`
 --
 ALTER TABLE `funcion`
-  ADD CONSTRAINT `funcion_ibfk_1` FOREIGN KEY (`codigoPelicula`) REFERENCES `pelicula` (`codigo`),
-  ADD CONSTRAINT `funcion_ibfk_2` FOREIGN KEY (`codigoSala`) REFERENCES `sala` (`codigo`);
+  ADD CONSTRAINT `funcion_ibfk_1` FOREIGN KEY (`codigoPelicula`) REFERENCES `pelicula` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `funcion_ibfk_2` FOREIGN KEY (`codigoSala`) REFERENCES `sala` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

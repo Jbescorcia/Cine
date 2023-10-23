@@ -9,10 +9,25 @@ class sala
     }
     public function create($nombre, $codigo, $capacidad)
     {
-        $sql = "INSERT INTO sala (nombre, codigo, capacidad) " .
-            "VALUES ('$nombre', '$codigo', '$capacidad')";
-        $result = $this->link->query($sql);
+        $sqlCheck = "SELECT COUNT(*) FROM sala WHERE codigo = '$codigo'";
+        $resultValido = $this->link->query($sqlCheck);
+        $count = $resultValido->fetch_row()[0];
+
+        if ($count > 0) {
+            echo "<script>alert('Ya existe un registro con el código proporcionado.');</script>";
+        } else {
+            $sql = "INSERT INTO sala (nombre, codigo, capacidad) " .
+                "VALUES ('$nombre', '$codigo', '$capacidad')";
+            $result = $this->link->query($sql);
+
+            if ($result) {
+                echo "<script>alert('Registro insertado con éxito.');</script>";
+            } else {
+                echo "<script>alert('Error al insertar el registro: " . $this->link->error . "');</script>";
+            }
+        }
     }
+
     public function listar()
     {
         $sql = 'SELECT * FROM sala';

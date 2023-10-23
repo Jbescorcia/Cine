@@ -172,8 +172,8 @@ $arrSala = $fun->listarCodigoSala($con->conectar());
 
 								<div class="col-12 col-md-3">
 									<div class="form-group">
-										<label for="fecha" class="bmd-label-floating">FECHA Y HORA</label>
-										<input type="datetime-local"  class="form-control" name="fecha" id="usuario_nombre" maxlength="35" required>
+										<label for="fecha">FECHA Y HORA</label>
+										<input type="datetime-local"  class="form-control" name="fecha" id="usuario_nombre" maxlength="35"  required>
 									</div>
 								</div>
 								<div class="col-12 col-md-3">
