@@ -5,8 +5,9 @@ Andres Torres.
 Carlos Lopez
 
 # Enunciado del Proyecto
-
+<br>
 Se requiere el desarrollo de un aplicativo para el manejo de las salas de cine cine de un almacen departamental, para esto se deben crear los siguientes componentes:
+<br>
 •	Administradores: debe existir un administrador precargado en la base de datos para realzar el primer ingreso.
     o	Crear administrador con los siguientes campos:
     	Nombre: texto.
