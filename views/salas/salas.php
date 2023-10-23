@@ -22,26 +22,24 @@ class sala
         return ($arr);
     }
 
-    
+
     public function delete($capacidad, $codigoSala)
     {
         $sqlFuncion = "SELECT COUNT(*) FROM funcion WHERE codigoSala = '$codigoSala'";
         $resultFuncion = $this->link->query($sqlFuncion);
+        $countFuncion = $resultFuncion ? $resultFuncion->fetch_row()[0] : 0;
 
-        if ($resultFuncion) {
-            $count = $resultFuncion->fetch_row()[0];
-
-            if ($count > 0) {
-                echo "<script>alert('No puedes eliminar esta sala hasta que elimines las funciones relacionadas a ella.');</script>";
-            } else {
-                $sql = "DELETE FROM sala WHERE capacidad = '$capacidad'";
-                $result = $this->link->query($sql);
-                echo "<script>alert('La Sala ha sido eliminada con éxito.');</script>";
-            }
+        if ($countFuncion > 0) {
+            echo "<script>alert('No puedes eliminar esta sala hasta que elimines las funciones relacionadas a ella.');</script>";
         } else {
-            echo "<script>alert('Error al verificar funciones relacionadas.');</script>";
-        }
+            $sql = "DELETE FROM sala WHERE capacidad = '$capacidad' AND codigo = '$codigoSala'";
+            $result = $this->link->query($sql);
 
-        
+            if ($result) {
+                echo "<script>alert('La Sala ha sido eliminada con éxito.');</script>";
+            } else {
+                echo "<script>alert('Error al eliminar la sala: " . $this->link->error . "');</script>";
+            }
+        }
     }
 }

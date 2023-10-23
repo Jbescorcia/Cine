@@ -26,19 +26,19 @@ class pelicula
     {
         $sqlFuncion = "SELECT COUNT(*) FROM funcion WHERE codigoPelicula = '$codigoPelicula'";
         $resultFuncion = $this->link->query($sqlFuncion);
+        $countFuncion = $resultFuncion ? $resultFuncion->fetch_row()[0] : 0;
 
-        if ($resultFuncion) {
-            $count = $resultFuncion->fetch_row()[0];
-
-            if ($count > 0) {
-                echo "<script>alert('No puedes eliminar esta película hasta que elimines las funciones relacionadas a ella.');</script>";
-            } else {
-                $sql = "DELETE FROM pelicula WHERE clasificacion = '$clasificacion'";
-                $result = $this->link->query($sql);
-                echo "<script>alert('La película ha sido eliminada con éxito.');</script>";
-            }
+        if ($countFuncion > 0) {
+            echo "<script>alert('No puedes eliminar esta pelicula hasta que elimines las funciones relacionadas a ella.');</script>";
         } else {
-            echo "<script>alert('Error al verificar funciones relacionadas.');</script>";
+            $sql = "DELETE FROM pelicula WHERE clasificacion = '$clasificacion' AND codigo = '$codigoPelicula'";
+            $result = $this->link->query($sql);
+
+            if ($result) {
+                echo "<script>alert('La pelicula ha sido eliminada con éxito.');</script>";
+            } else {
+                echo "<script>alert('Error al eliminar la sala: " . $this->link->error . "');</script>";
+            }
         }
     }
 }
