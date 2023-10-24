@@ -1,11 +1,12 @@
 <?php
 
+
 if (isset($_POST['login'])) {
 
     $link = new mysqli('localhost', 'root', '', 'cine');
 
     if ($link->connect_errno) {
-		echo "<script>alert('Erro de Conexion con la base de datos.');</script>";
+		echo "<script>alert('Error de Conexion con la base de datos.');</script>";
     } else {
         $username = $_POST['username'];
         $password = $_POST['password'];
@@ -13,7 +14,7 @@ if (isset($_POST['login'])) {
 
         $result = $link->query($sql);
         if ($result->fetch_assoc()) {
-            session_start();
+			session_start();
             $_SESSION['Reg'] = 'ok';
             header('Location: /views/home.php');
 
@@ -26,7 +27,7 @@ if (isset($_POST['login'])) {
 }
 
 if (isset($_POST['cerrar'])) {
-    session_abort();
+    session_destroy();
     header('Location: /views/login.php');
 }
 
