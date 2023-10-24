@@ -3,7 +3,7 @@
 
 if (isset($_POST['login'])) {
 
-    $link = new mysqli('localhost', 'root', '', 'cine');
+    $link = new mysqli('cine-do-user-14505311-0.c.db.ondigitalocean.com:25060', 'doadmin', 'AVNS_uaU51AxF7UDKSZEH3_K', 'cine');
 
     if ($link->connect_errno) {
 		echo "<script>alert('Error de Conexion con la base de datos.');</script>";
